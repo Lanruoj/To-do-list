@@ -3,7 +3,7 @@
 * global date/time?
 
 
-## Home/todo list (todo_list)
+## Home/todo list (todo_home)
 * Receive sorted list from sort_list
 - Displays:
 - date/time
