@@ -21,9 +21,4 @@
 
 # get_option()
 
-#### CLASS
 
-class Task:
-    
-    def __init__(self, name, time_added, deadline, time_remaining) -> None:
-        pass
