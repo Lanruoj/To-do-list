@@ -5,12 +5,16 @@
 
 
 ## Home/todo list (todo_home)
-* Receive sorted list from sort_list
+* Receive unsorted_list
+- Sort unsorted_list, as todo_list
 - Displays:
-- date/time
-- remaining tasks (if any) sorted by deadline
-- options for what the user can do
+	- date/time (date_time)
+	- remaining tasks (if any) sorted by deadline (todo_list)
+	- options for what the user can do
 - Return todo_list
+----> run choose_option()
+
+
 
 ## Get user input (get_input)
 * Receive prompt/message
@@ -18,7 +22,7 @@
 - Take user input, store as user_input
 - Return user_input
 
-## Choose option (choose_option)
+## Choose option (get_option)
 - Take user input, store as option
 - Options are:
 1. Add task ("A")
@@ -30,34 +34,18 @@
 - Return option
 
 * ask repetitively??? ***********
-<!-- ## Get task (get_task)
-- Take user input, store as task
-	- check if valid input
-- Return task
-- **Store time added** ========> own function?
-- Ask for deadline =======> own function?
-	- check for valid input
-	- store as deadline
-- Return task ========> how parse class 
-
-
-## Add task to list (add_task)
-* Receive task from get_task
-- Add task to unsorted_list 
-=====> run sort_list function within this function?
-- Return unsorted_list -->
---------
 ## Add task (add_task)
 - Take user input, store as task
 - **Store time added**
 - Ask for deadline
 - check for valid input
 - if "yes":
-    - take user input, store as choice
-    - store as deadline
+- take user input, store as choice
+- if input valid time format:	- store as deadline
 - otherwise skip
 - Add task to unsorted_list
----------
+
+
 ## Sort list (sort_list)
 * Receive unsorted list (unsorted_list)
 - Sort list by deadline time (time remaining) *********
