@@ -1,3 +1,4 @@
+# Pseudocode
 
 * if first task of the day then show welcome message with morning/afternoon/evening
 * global date/time?
@@ -29,22 +30,34 @@
 - Return option
 
 * ask repetitively??? ***********
-## Get task (get_task)
+<!-- ## Get task (get_task)
 - Take user input, store as task
 	- check if valid input
 - Return task
-
-- **Store time added**
-- Ask for deadline
+- **Store time added** ========> own function?
+- Ask for deadline =======> own function?
 	- check for valid input
 	- store as deadline
-- Return task
+- Return task ========> how parse class 
+
 
 ## Add task to list (add_task)
 * Receive task from get_task
-- Add task to unsorted_list (file or list)
-- Return unsorted_list
-
+- Add task to unsorted_list 
+=====> run sort_list function within this function?
+- Return unsorted_list -->
+--------
+## Add task (add_task)
+- Take user input, store as task
+- **Store time added**
+- Ask for deadline
+- check for valid input
+- if "yes":
+    - take user input, store as choice
+    - store as deadline
+- otherwise skip
+- Add task to unsorted_list
+---------
 ## Sort list (sort_list)
 * Receive unsorted list (unsorted_list)
 - Sort list by deadline time (time remaining) *********
@@ -58,9 +71,9 @@
 - Sort list
 - Return todo_list
 
-## Delete task (delete_task)
-* Receive todo_list
-- Ask "Which task the user would like to delete?", store response as task
+## Delete task (delete_task(todo_list, task_to_delete))
+* Receive todo_list, task=task_to_delete
+- Ask "Which task would you like to delete?", store response as task_to_delete
 - Remove task from todo_list
 - Return todo_list
 
@@ -73,5 +86,5 @@
 - Print goodbye message
 - Break
 
-Always return to home/todo list
+* Always return to home/todo list
 
