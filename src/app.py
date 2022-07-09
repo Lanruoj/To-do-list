@@ -31,14 +31,15 @@ def choose_option():
 ######
 
 def add_task():
+    time_added = datetime.now().strftime("%H:%M:%S")
     name = get_input("Enter task\n>")
     has_deadline = get_input("Does this task have a deadline? [y/n]\n>")
-    deadline = None
-    if has_deadline=="y":
-        while not re.match('^[0-2]{1}[0-9]{1}:[0-5]{1}[0-9]{1}$', deadline):
-            deadline = get_input("Time due: [HH:MM]\n>")
-        print("Added")
-    task = (name, time_now, deadline)
+    deadline_input = get_input("Enter deadline\n>")
+    deadline_obj = datetime.strptime(deadline_input, "%H:%M")
+    deadline = datetime.strftime(deadline_obj, "%H:%M")
+    print(deadline)
+
+    task = (name, time_added, deadline)
     print(task)
 
 
