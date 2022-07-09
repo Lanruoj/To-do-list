@@ -31,14 +31,24 @@ def choose_option():
 ######
 
 def add_task():
-    time_added = datetime.now().strftime("%H:%M:%S")
+    time_format = "%H:%M"
+    time_added = datetime.now().strftime(time_format)
     name = get_input("Enter task\n>")
+    deadline = None
     has_deadline = get_input("Does this task have a deadline? [y/n]\n>")
-    deadline_input = get_input("Enter deadline\n>")
-    deadline_obj = datetime.strptime(deadline_input, "%H:%M")
-    deadline = datetime.strftime(deadline_obj, "%H:%M")
-    print(deadline)
-
+    deadline_input = ""
+    if has_deadline=="y":
+        while True:
+            deadline_input = get_input("Enter deadline\n>")
+        # CHECK IF deadline_input MATCHES time_format
+            try: 
+                deadline_obj = datetime.strptime(deadline_input, time_format)
+                deadline = datetime.strftime(deadline_obj, time_format)
+                break
+            except ValueError:
+                print("Invalid time format")
+    
+    print("out of loop")
     task = (name, time_added, deadline)
     print(task)
 
