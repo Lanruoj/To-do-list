@@ -1,9 +1,18 @@
-## GLOBAL VARIABLES
+from datetime import date, datetime, time, timedelta
+import re
 
+## GLOBAL VARIABLES
+date_now = date.today()
+time_now = datetime.now().strftime("%H:%M:%S")
+
+##
+
+# Gets user input, using different prompt messages
 def get_input(prompt):
     user_input = input(prompt)
     return user_input
 
+# User chooses what they'd like the program to do via user input
 def choose_option():
     options = {
         "A": add_task,
@@ -13,7 +22,7 @@ def choose_option():
         "X": exit_program
     }
     while True:
-        option = get_input("> ")
+        option = get_input(">")
         if option not in options:
             print("Invalid option")
         else:
@@ -22,8 +31,19 @@ def choose_option():
 ######
 
 def add_task():
-    task = get_input("Enter task > ")
-    
+    name = get_input("Enter task\n>")
+    has_deadline = get_input("Does this task have a deadline? [y/n]\n>")
+    deadline = None
+    if has_deadline=="y":
+        while not re.match('^[0-2]{1}[0-9]{1}:[0-5]{1}[0-9]{1}$', deadline):
+            deadline = get_input("Time due: [HH:MM]\n>")
+        print("Added")
+    task = (name, time_now, deadline)
+    print(task)
+
+
+add_task()
+
 
 
 
