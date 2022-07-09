@@ -12,14 +12,15 @@ First, it greets the user with the day/date/time and displays that day's tasks i
 
 ## List of features:
 1. Display todo-list with a formatted string in a table-like design
+    - Uses datetime module for time and date information/calculations
     - "Home" function, all functions except exit loops back to this
     - Sorts the global unsorted list on each execution
-    - Displays task name, time added, deadline time, and time remaining
+    - Displays task name, time added, deadline time, and time remaining (using timedelta)
     - Takes in the tasks from a global data structure
     - If no tasks, show "no current tasks"
     - Show options for user
 
-2. User can choose an option what to do 
+2. User can choose an option for what to do 
     - Checks for keyboard input that matches a dictionary of options (local variable)
         - If it doesn't, throw error and try again
     - Runs the corresponding function name as the value in dictionary
@@ -32,7 +33,6 @@ First, it greets the user with the day/date/time and displays that day's tasks i
     - If it does, stores deadline with the task object
     - Adds task to global unsorted list
 
-
 4. Mark tasks as done
     - User can mark a task as completed 
     - Checks if task is in list or not
@@ -40,10 +40,9 @@ First, it greets the user with the day/date/time and displays that day's tasks i
     - Otherwise, adds it to a global completed list
     - Removes from global todo list
 
-5. Purely delete task
-    - Removes task from list
 
-6. Gracefully quit program
-    - User can end the main program at anytime with a keyword
-    - Displays goodbye message
 
+## Tests
+1. Check that `choose_options()` outputs and runs a function when user input matches option
+    * Run a dummy function `print_hello` that prints `"hello"` when user inputs corresponding dictionary key `"H"`
+    

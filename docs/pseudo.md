@@ -92,3 +92,23 @@
 
 * Always return to home/todo list
 
+
+
+## FUNCTION LIST
+- todo_home(unsorted_list)
+
+- get_input(prompt)
+
+- choose_option()
+
+- add_task(task)
+
+- sort_list(unsorted_list)
+
+- mark_as_done(todo_list, completed_list)
+
+- delete_task(todo_list)
+
+- print_completed(completed_list)
+
+- exit_program()
