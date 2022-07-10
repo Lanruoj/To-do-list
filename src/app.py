@@ -4,6 +4,7 @@ import re
 ## GLOBAL VARIABLES
 date_now = date.today()
 time_now = datetime.now().strftime("%H:%M:%S")
+todo_list = []
 
 ##
 
@@ -31,18 +32,42 @@ def choose_option():
 ######
 
 def add_task():
+    time_format = "%H:%M"
+    time_added = datetime.now().strftime(time_format)
     name = get_input("Enter task\n>")
+    deadline = "00:00"
     has_deadline = get_input("Does this task have a deadline? [y/n]\n>")
-    deadline = None
+    deadline_input = ""
     if has_deadline=="y":
-        while not re.match('^[0-2]{1}[0-9]{1}:[0-5]{1}[0-9]{1}$', deadline):
-            deadline = get_input("Time due: [HH:MM]\n>")
-        print("Added")
-    task = (name, time_now, deadline)
-    print(task)
+        while deadline < time_added: ### use a different condition!
+            # while True:
+            deadline_input = get_input("Enter deadline\n>")
+            # CHECK IF deadline_input MATCHES time_format
+            try: 
+                deadline_obj = datetime.strptime(deadline_input, time_format)
+                deadline = datetime.strftime(deadline_obj, time_format)
+
+            except ValueError:
+                print("Invalid time format")
+                
+            if deadline < time_added:
+                print("Time must be in the future")
+
+    # print("out of loop")
+    task = (name, time_added, deadline)
+    todo_list.append(task)
+    # print(task)
 
 
 add_task()
+print(todo_list)
+# PRINT THE 2ND INDEX OF task IN todo_list
+print([task[2] for task in todo_list])
+
+add_task()
+print(todo_list)
+# PRINT THE 2ND INDEX OF task IN todo_list
+print([task[2] for task in todo_list])
 
 
 
