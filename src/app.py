@@ -100,7 +100,8 @@ def todo_home():
     else:
         todo_table = PrettyTable()
         todo_table.field_names = ["Task", "Deadline", "Time remaining"]
-        todo_table.add_row([todo_list[0][0], todo_list[0][2], todo_list[0][3]])
+        for task in todo_list:       
+            todo_table.add_row([task[0], task[2], task[3]])
         print(todo_table)
 
     
