@@ -4,11 +4,7 @@ from prettytable import PrettyTable
 ## GLOBAL VARIABLES ##
 date_today = date.today()
 
-datetime_now = datetime.now()
 
-time_now_obj = datetime.now().time()
-
-time_now_str = datetime.now().strftime("%H:%M:%S")
 
 todo_list = []
 
@@ -16,6 +12,7 @@ todo_list = []
 def todo_home():
     # todo_table = PrettyTable()
     # todo_table.field_names = ["Task", "Deadline", "Time remaining"]
+    time_now_str = datetime.now().strftime("%H:%M:%S")
     sort_by_remaining_time()
     print(f"Time: {time_now_str}")
     if todo_list == []:
@@ -24,6 +21,10 @@ def todo_home():
     
 
     print(todo_list)
+
+    for task in todo_list:
+        print(task[3])
+
     print("Options:\n[A] Add a task\n[M] Mark as done\n[D] Delete a task\n[C] View completed list\n[X] Exit program")
     
 
@@ -50,6 +51,8 @@ def choose_option():
 
 ## ADD TASK TO LIST ##
 def add_task():
+    datetime_now = datetime.now()
+    time_now_obj = datetime.now().time()
     time_format = "%H:%M"
     time_added_str = datetime.now().strftime(time_format)
     name = get_input("Enter task\n>")
