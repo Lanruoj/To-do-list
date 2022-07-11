@@ -4,15 +4,18 @@ from prettytable import PrettyTable
 ## GLOBAL VARIABLES ##
 date_today = date.today()
 time_format = "%H:%M"
-
 todo_list = []
-
 completed_list = []
+
 
 # Gets user input, using different prompt messages
 def get_input(prompt):
     user_input = input(prompt)
-    return user_input
+    if user_input == "X":
+        quit()
+    else:
+        return user_input
+
 
 # User chooses what they'd like the program to do via user input
 def choose_option():
@@ -21,28 +24,29 @@ def choose_option():
         "M": mark_as_done,
         "D": delete_task,
         "C": print_completed,
-        "X": exit_program
+        # "X": exit_program
     }
     while True:
-        option = get_input(">")
+        option = get_input("> ")
         if option not in options:
             print("Invalid option")
         else:
             return options[option]()
+
 
 ## ADD TASK TO LIST ##
 def add_task():
     datetime_now = datetime.now()
     time_now_obj = datetime.now().time()
     time_added_str = datetime.now().strftime(time_format)
-    name = get_input("Enter task\n>")
+    name = get_input("Enter task\n> ")
 
     # has_deadline = get_input("Does this task have a deadline? [y/n]\n>")
     # if has_deadline == "y":
 
         ## CHECK IF deadline_input MATCHES time_format ##
     while True:
-        deadline_input = get_input("Enter deadline\n>")
+        deadline_input = get_input("Enter deadline\n> ")
         try: 
             datetime_now = datetime.now()
             deadline_obj = datetime.strptime(deadline_input, time_format).time()
@@ -61,20 +65,18 @@ def add_task():
     todo_list.append(task)
 
 
-
-
 ## EXTRACT deadline FROM task TUPLE ##
 def extract_remaining_time(item):
     return item[3] 
+
 
 ## SORT LIST BY DEADLINE TIME ##
 def sort_by_remaining_time():
     todo_list.sort(key=extract_remaining_time)
 
 
-
 def mark_as_done():
-    task = get_input("Enter completed task\n>")
+    task = get_input("Enter completed task\n> ")
     # while True:
     for i in todo_list:
         if task == i[0]:
@@ -89,11 +91,8 @@ def mark_as_done():
     return completed_list
 
 
-
-
-
 def delete_task():
-    task = get_input("Enter completed task\n>")
+    task = get_input("Enter completed task\n> ")
     for i in todo_list:
         if task == i[0]:
             todo_list.remove(i)
@@ -101,7 +100,6 @@ def delete_task():
     else:
         print("ERROR: No existing task")
     
-
 
 
 def print_completed():
@@ -112,14 +110,9 @@ def print_completed():
         completed_table.add_row([task[0], task[1]])
     
     print(completed_table)
-    option = get_input("Continue? [y/n]\n>")
+    option = get_input("Continue? [y/n]\n> ")
     if option == "y":
         todo_home()
-
-
-
-def exit_program():
-    pass
 
 
 ## HOME ##
@@ -139,9 +132,12 @@ def todo_home():
     return home_display
     
 
-
-
-
+# def exit_program():
+#     confirmation = input("Are you sure you want to quit? [y/n]\n> ")
+#     if confirmation == "y":
+#         quit()
+#     else:
+#         return False
 
 ## MAIN PROGRAM LOOP
 def main_loop():
