@@ -93,7 +93,16 @@ def mark_as_done():
 
 
 def delete_task():
-    pass
+    task = get_input("Enter completed task\n>")
+    for i in todo_list:
+        if task == i[0]:
+            todo_list.remove(i)
+            break
+    else:
+        print("ERROR: No existing task")
+    
+
+
 
 def print_completed():
     completed_table = PrettyTable()
