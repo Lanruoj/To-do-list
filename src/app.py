@@ -5,11 +5,9 @@ from prettytable import PrettyTable
 date_today = date.today()
 time_format = "%H:%M"
 
-
-
 todo_list = []
 
-
+completed_list = []
 
 # Gets user input, using different prompt messages
 def get_input(prompt):
@@ -39,24 +37,25 @@ def add_task():
     time_added_str = datetime.now().strftime(time_format)
     name = get_input("Enter task\n>")
 
-    has_deadline = get_input("Does this task have a deadline? [y/n]\n>")
-    if has_deadline == "y":
+    # has_deadline = get_input("Does this task have a deadline? [y/n]\n>")
+    # if has_deadline == "y":
+
         ## CHECK IF deadline_input MATCHES time_format ##
-        while True:
-            deadline_input = get_input("Enter deadline\n>")
-            try: 
-                datetime_now = datetime.now()
-                deadline_obj = datetime.strptime(deadline_input, time_format).time()
-                # deadline_str = datetime.strftime(deadline_input, time_format)
-                if deadline_obj < time_now_obj:
-                    print("ERROR: Time must be in the future")               
-                else:
-                    deadline_dt = datetime.combine(datetime_now, deadline_obj)
-                    time_now_dt = datetime.combine(datetime_now, time_now_obj)
-                    remaining_time = deadline_dt - time_now_dt
-                    break
-            except ValueError:
-                    print("ERROR: Invalid time format")
+    while True:
+        deadline_input = get_input("Enter deadline\n>")
+        try: 
+            datetime_now = datetime.now()
+            deadline_obj = datetime.strptime(deadline_input, time_format).time()
+            # deadline_str = datetime.strftime(deadline_input, time_format)
+            if deadline_obj < time_now_obj:
+                print("ERROR: Time must be in the future")               
+            else:
+                deadline_dt = datetime.combine(datetime_now, deadline_obj)
+                time_now_dt = datetime.combine(datetime_now, time_now_obj)
+                remaining_time = deadline_dt - time_now_dt
+                break
+        except ValueError:
+                print("ERROR: Invalid time format")
 
     task = (name, time_added_str, deadline_obj, remaining_time)
     todo_list.append(task)
@@ -75,7 +74,22 @@ def sort_by_remaining_time():
 
 
 def mark_as_done():
-    pass
+    task = get_input("Enter completed task\n>")
+    # while True:
+    for i in todo_list:
+        if task == i[0]:
+            completed_list.append(i)
+            todo_list.remove(i)
+            print(completed_list)
+            print(todo_list)
+        else:
+            print("ERROR: No existing task")
+
+
+
+
+
+
 
 def delete_task():
     pass
