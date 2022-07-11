@@ -8,25 +8,7 @@ date_today = date.today()
 
 todo_list = []
 
-## HOME ##
-def todo_home():
-    # todo_table = PrettyTable()
-    # todo_table.field_names = ["Task", "Deadline", "Time remaining"]
-    time_now_str = datetime.now().strftime("%H:%M:%S")
-    sort_by_remaining_time()
-    print(f"Time: {time_now_str}")
-    if todo_list == []:
-        print("No current tasks")
-    
-    
 
-    print(todo_list)
-
-    for task in todo_list:
-        print(task[3])
-
-    print("Options:\n[A] Add a task\n[M] Mark as done\n[D] Delete a task\n[C] View completed list\n[X] Exit program")
-    
 
 # Gets user input, using different prompt messages
 def get_input(prompt):
@@ -56,10 +38,9 @@ def add_task():
     time_format = "%H:%M"
     time_added_str = datetime.now().strftime(time_format)
     name = get_input("Enter task\n>")
+
     # has_deadline = get_input("Does this task have a deadline? [y/n]\n>")
-    # deadline_input = ""
-    # if has_deadline=="y":
-        # while True: ### use a different condition!
+
     ## CHECK IF deadline_input MATCHES time_format ##
     while True:
         deadline_input = get_input("Enter deadline\n>")
@@ -82,26 +63,13 @@ def add_task():
         except ValueError:
                 print("ERROR: Invalid time format")
     
+    return task
 
-    # deadline_dt = datetime.combine(datetime_now, deadline_obj)
-    # time_now_dt = datetime.combine(datetime_now, time_now_obj)
-    # remaining_time = deadline_dt - time_now_dt
-    # task = (name, time_added_str, deadline_obj, remaining_time)
-    # print(f"Remaining time: {remaining_time} minutes")
-
-    
-    
-    # print(f"Remaining time: {remaining_time} minutes")
-
-    ## CREATE TASK OBJECT AS A TUPLE OF VALUES
-    # task = (name, time_added_str, deadline_obj, remaining_time)
-    ## ADD TASK TO GLOBAL LIST
-    # todo_list.append(task)
 
 
 ## EXTRACT deadline FROM task TUPLE ##
-def extract_remaining_time(task):
-    return task[3] 
+def extract_remaining_time(item):
+    return item[3] 
 
 ## SORT LIST BY DEADLINE TIME ##
 def sort_by_remaining_time():
@@ -120,6 +88,34 @@ def print_completed():
 
 def exit_program():
     pass
+
+
+## HOME ##
+def todo_home():
+    time_now_str = datetime.now().strftime("%H:%M:%S")
+    sort_by_remaining_time()
+    print(f"Time: {time_now_str}")
+    if todo_list == []:
+        print("No current tasks")
+    else:
+        todo_table = PrettyTable()
+        todo_table.field_names = ["Task", "Deadline", "Time remaining"]
+        todo_table.add_row([todo_list[0][0], todo_list[0][2], todo_list[0][3]])
+        print(todo_table)
+
+    
+    
+
+    # print(todo_list)
+
+    # for task in todo_list:
+    #     print(task[3])
+
+    print("Options:\n[A] Add a task\n[M] Mark as done\n[D] Delete a task\n[C] View completed list\n[X] Exit program")
+    
+
+
+
 
 
 ## MAIN PROGRAM LOOP
