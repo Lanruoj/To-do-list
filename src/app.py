@@ -40,7 +40,6 @@ def add_task():
     name = get_input("Enter task\n>")
 
     # has_deadline = get_input("Does this task have a deadline? [y/n]\n>")
-
     ## CHECK IF deadline_input MATCHES time_format ##
     while True:
         deadline_input = get_input("Enter deadline\n>")
@@ -49,8 +48,7 @@ def add_task():
             deadline_obj = datetime.strptime(deadline_input, time_format).time()
             # deadline_str = datetime.strftime(deadline_input, time_format)
             if deadline_obj < time_now_obj:
-                print("ERROR: Time must be in the future")
-                
+                print("ERROR: Time must be in the future")               
             else:
                 deadline_dt = datetime.combine(datetime_now, deadline_obj)
                 time_now_dt = datetime.combine(datetime_now, time_now_obj)
@@ -59,11 +57,9 @@ def add_task():
                 print(f"Remaining time: {remaining_time} minutes")
                 todo_list.append(task)
                 break
-
         except ValueError:
                 print("ERROR: Invalid time format")
-    
-    return task
+
 
 
 
@@ -94,25 +90,17 @@ def exit_program():
 def todo_home():
     time_now_str = datetime.now().strftime("%H:%M:%S")
     sort_by_remaining_time()
-    print(f"Time: {time_now_str}")
-    if todo_list == []:
-        print("No current tasks")
+    todo_table = PrettyTable()
+    todo_table.field_names = ["Task", "Deadline", "Time remaining"]
+
+    if len(todo_list) < 1:
+        todo_table.add_row(["No current tasks", "-", "-"])    
     else:
-        todo_table = PrettyTable()
-        todo_table.field_names = ["Task", "Deadline", "Time remaining"]
         for task in todo_list:       
             todo_table.add_row([task[0], task[2], task[3]])
-        print(todo_table)
 
-    
-    
-
-    # print(todo_list)
-
-    # for task in todo_list:
-    #     print(task[3])
-
-    print("Options:\n[A] Add a task\n[M] Mark as done\n[D] Delete a task\n[C] View completed list\n[X] Exit program")
+    home_display = f"Time: {time_now_str}\n{todo_table}\nOptions:\n[A] Add a task\n[M] Mark as done\n[D] Delete a task\n[C] View completed list\n[X] Exit program"
+    return home_display
     
 
 
@@ -123,7 +111,7 @@ def todo_home():
 def main_loop():
     while True:
         sort_by_remaining_time()
-        todo_home()
+        print(todo_home())
         choose_option()
 
 main_loop()
