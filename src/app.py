@@ -78,13 +78,13 @@ def mark_as_done():
     # while True:
     for i in todo_list:
         if task == i[0]:
+            # time_added_str = datetime.now().strftime(time_format)
+            # i[3] = time_added_str
             completed_list.append(i)
             todo_list.remove(i)
-            print(completed_list)
-            print(todo_list)
-        else:
-            print("ERROR: No existing task")
-
+            break
+    else:
+        print("ERROR: No existing task")
 
 
 
@@ -95,7 +95,20 @@ def delete_task():
     pass
 
 def print_completed():
-    pass
+    print(completed_list)
+    completed_table = PrettyTable()
+    completed_table.field_names = ["Task"]
+
+    for task in completed_list:       
+        completed_table.add_row([task[0]])
+        # print(task[0])
+    
+    print(completed_table)
+    option = get_input("Continue? [y/n]\n>")
+    if option == "y":
+        todo_home()
+
+
 
 def exit_program():
     pass
