@@ -2,7 +2,7 @@ from datetime import date, datetime, time, timedelta
 from prettytable import PrettyTable
 
 ## GLOBAL VARIABLES ##
-date_today = date.today()
+# date_today = date.today()
 time_format = "%H:%M"
 todo_list = []
 completed_list = []
@@ -27,7 +27,7 @@ def choose_option():
         # "X": exit_program
     }
     while True:
-        option = get_input(">")
+        option = get_input("> ")
         if option not in options:
             print("Invalid option")
         else:
@@ -44,9 +44,9 @@ def add_task():
     # has_deadline = get_input("Does this task have a deadline? [y/n]\n>")
     # if has_deadline == "y":
 
-        ## CHECK IF deadline_input MATCHES time_format ##
     while True:
         deadline_input = get_input("Enter deadline\n> ")
+        ## CHECK IF deadline_input MATCHES time_format ##
         try: 
             datetime_now = datetime.now()
             deadline_obj = datetime.strptime(deadline_input, time_format).time()
@@ -67,7 +67,8 @@ def add_task():
 
 ## EXTRACT deadline FROM task TUPLE ##
 def extract_remaining_time(item):
-    return item[3] 
+    remaining_time = item[3]    
+    return remaining_time 
 
 
 ## SORT LIST BY DEADLINE TIME ##
@@ -117,6 +118,7 @@ def print_completed():
 
 ## HOME ##
 def todo_home():
+    date_today = date.today()
     time_now_str = datetime.now().strftime(time_format)
     sort_by_remaining_time()
     todo_table = PrettyTable()
@@ -128,7 +130,7 @@ def todo_home():
         for task in todo_list:       
             todo_table.add_row([task[0], task[2], task[3]])
 
-    home_display = f"Time: {time_now_str}\n{todo_table}\nOptions:\n[A] Add a task\n[M] Mark as done\n[D] Delete a task\n[C] View completed list\n[X] Exit program"
+    home_display = f"\n----TO-DO LIST APP----\nDate: {date_today}\nTime: {time_now_str}\n{todo_table}\nOptions:\n[A] Add a task\n[M] Mark as done\n[D] Delete a task\n[C] View completed list\n[X] Exit program"
     return home_display
     
 
