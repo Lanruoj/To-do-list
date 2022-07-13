@@ -2,11 +2,9 @@ from datetime import date, datetime, time, timedelta
 from prettytable import PrettyTable
 
 ## GLOBAL VARIABLES ##
-# date_today = date.today()
 time_format = "%H:%M"
 todo_list = []
 completed_list = []
-
 
 # Gets user input, using different prompt messages
 def get_input(prompt):
@@ -35,19 +33,18 @@ def choose_option():
 
 
 def mark_as_done():
-    task = get_input("Enter completed task ([back] to cancel)\n> ")
-    # while True:
-    for i in todo_list:
-        if task == i[0]:
-            time_added_str = datetime.now().strftime(time_format)
-            completed_task = (i[0], time_added_str)
-            completed_list.append(completed_task)
-            todo_list.remove(i)
-            break
-    else:
-        print("ERROR: No existing task")
+    while True:
+        task = get_input("Enter completed task ([back] to cancel)\n> ")
+        for i in todo_list:
+            if task == i[0]:
+                time_added_str = datetime.now().strftime(time_format)
+                completed_task = (i[0], time_added_str)
+                completed_list.append(completed_task)
+                todo_list.remove(i)
+                return completed_list
+        else:
+            print("ERROR: No existing task")
     
-    return completed_list
 
 
 def delete_task():
@@ -76,6 +73,8 @@ def print_completed():
 
 ## HOME ##
 def todo_home():
+    dt_now = datetime.now()
+    day_name = dt_now.strftime("%A")
     sort_by_rem_time()
     date_today = date.today()
     time_now_str = datetime.now().strftime(time_format)
@@ -94,7 +93,7 @@ def todo_home():
             else:
                 todo_table.add_row([name, deadline, rem_time])
 
-    home_display = f"\n----TO-DO LIST APP----\nDate: {date_today}\nTime: {time_now_str}\n{todo_table}\nOptions:\n[A] Add a task\n[M] Mark as done\n[D] Delete a task\n[C] View completed list\n[X] Exit program"
+    home_display = f"\n----TO-DO LIST APP----\nDate: {day_name}, {date_today}\nTime: {time_now_str}\n{todo_table}\nOptions:\n[A] Add a task\n[M] Mark as done\n[D] Delete a task\n[C] View completed list\n[X] Exit program"
     return home_display
     
 
@@ -106,12 +105,13 @@ def get_deadline():
             deadline_obj = datetime.strptime(deadline_input, time_format).time()
             # deadline_str = datetime.strftime(deadline_input, time_format)
             if deadline_obj < datetime.now().time():
-                print("ERROR: Time must be in the future")               
+                print("ERROR: Time must be in the future")
             else:
-                print("HELLO")
-                return deadline_obj
+                break           
         except ValueError:
                 print("ERROR: Invalid time format")
+
+    return deadline_obj
 
 
 def add_task(name):
