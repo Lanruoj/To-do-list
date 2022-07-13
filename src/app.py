@@ -43,7 +43,11 @@ def mark_as_done():
                 todo_list.remove(i)
                 return completed_list
         else:
-            print("ERROR: No existing task")
+            if task == "back":
+                return 
+            else:
+                print("ERROR: No existing task")
+                
     
 
 
@@ -137,6 +141,7 @@ def calculate_rem_time(deadline):
         rem_time = deadline_dt - time_now_dt
     else:
         rem_time = None
+
     return rem_time
 
 def sort_by_rem_time():
