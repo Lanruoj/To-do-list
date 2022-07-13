@@ -1,4 +1,5 @@
-from datetime import date, datetime, time, timedelta
+from datetime import date, datetime, time
+import time
 from prettytable import PrettyTable
 import os
 
@@ -80,7 +81,7 @@ def print_completed():
     else:
         completed_table.add_row(["No completed tasks", "-"])  
         
-    display = f"\n----TO-DO LIST APP----\nDate: {day_name}, {date_today}\nTime: {time_now_str}\n\n----COMPLETED TASKS----\n{completed_table}\n"
+    display = f"\n----TO-DO LIST APP----\nDate: {day_name}, {date_today}\nTime: {time_now_str}\n\n----COMPLETED TASKS----\n{completed_table}"
     print(display)
     option = get_input("Enter [y] to continue\n> ")
     if option == "y":
@@ -146,20 +147,17 @@ def add_task(name):
     todo_list.append(task)
 
 def calculate_rem_time(deadline):
-    if deadline != None:
+    if deadline:
         datetime_now = datetime.now()
-        time_now_obj = datetime.now().time()
-        deadline_dt = datetime.combine(datetime_now, deadline)
-        time_now_dt = datetime.combine(datetime_now, time_now_obj)
-        td = deadline_dt - time_now_dt
-        seconds = td.seconds
-        rem_time = timedelta(seconds = seconds)
-        rem_time_str = str(rem_time)
-        return rem_time_str[:-3]
+        deadline_dt = datetime.combine(date.today(), deadline)
+        delta = deadline_dt - datetime_now
+        seconds = delta.seconds
+        delta_dt = time.gmtime(seconds)
+        rem_time = time.strftime(time_format, delta_dt)
+        return rem_time
     else:
-        rem_time_str = None
-        return rem_time_str
-
+        rem_time = None
+        return rem_time
 
 
 def sort_by_rem_time():
