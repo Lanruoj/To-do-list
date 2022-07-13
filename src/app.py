@@ -87,7 +87,7 @@ def todo_home():
         for task in todo_list:
             name = task[0]
             deadline = task[1]
-            rem_time = task[2]
+            rem_time = calculate_rem_time(deadline)
             if deadline == None:         
                 todo_table.add_row([name, "-", "-"])
             else:
@@ -115,27 +115,32 @@ def get_deadline():
 
 
 def add_task(name):
-    option = get_input("Does the task have a deadline? [y/n]\n> ")
-    if option == "y":
-        deadline = get_deadline()
-        rem_time = calculate_rem_time(deadline)
-    else:
-        deadline = None
-        rem_time = None
+    deadline = False
+    while deadline == False:
+        option = get_input("Does the task have a deadline? [y/n]\n> ")
+        if option == "y":
+            deadline = get_deadline()
+        elif option == "n":
+            deadline = None
+        else:
+            print("ERROR: Invalid input")
 
-    task = (name, deadline, rem_time)
+    task = (name, deadline)
     todo_list.append(task)
 
 def calculate_rem_time(deadline):
-    datetime_now = datetime.now()
-    time_now_obj = datetime.now().time()
-    deadline_dt = datetime.combine(datetime_now, deadline)
-    time_now_dt = datetime.combine(datetime_now, time_now_obj)
-    rem_time = deadline_dt - time_now_dt
+    if deadline != None:
+        datetime_now = datetime.now()
+        time_now_obj = datetime.now().time()
+        deadline_dt = datetime.combine(datetime_now, deadline)
+        time_now_dt = datetime.combine(datetime_now, time_now_obj)
+        rem_time = deadline_dt - time_now_dt
+    else:
+        rem_time = None
     return rem_time
 
 def sort_by_rem_time():
-    todo_list.sort(key=lambda x: (x[2] is None, x[2]))
+    todo_list.sort(key=lambda x: (x[1] is None, x[1]))
 
 # MAIN PROGRAM LOOP
 def main_loop():
