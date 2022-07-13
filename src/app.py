@@ -35,7 +35,7 @@ def choose_option():
 
 
 def mark_as_done():
-    task = get_input("Enter completed task\n> ")
+    task = get_input("Enter completed task ([back] to cancel)\n> ")
     # while True:
     for i in todo_list:
         if task == i[0]:
@@ -51,7 +51,7 @@ def mark_as_done():
 
 
 def delete_task():
-    task = get_input("Enter completed task\n> ")
+    task = get_input("Enter task to delete ([back] to cancel)\n> ")
     for i in todo_list:
         if task == i[0]:
             todo_list.remove(i)
@@ -69,7 +69,7 @@ def print_completed():
         completed_table.add_row([task[0], task[1]])
     
     print(completed_table)
-    option = get_input("Continue? [y/n]\n> ")
+    option = get_input("Enter [y] to continue\n> ")
     if option == "y":
         todo_home()
 
@@ -99,14 +99,10 @@ def todo_home():
     
 
 def get_deadline():
-    # datetime_now = datetime.now()
-    # time_now_obj = datetime.now().time()
-    # time_added_str = datetime.now().strftime(time_format)
     while True:
         deadline_input = get_input("Enter deadline\n> ")
         ## CHECK IF deadline_input MATCHES time_format ##
         try: 
-            # datetime_now = datetime.now()
             deadline_obj = datetime.strptime(deadline_input, time_format).time()
             # deadline_str = datetime.strftime(deadline_input, time_format)
             if deadline_obj < datetime.now().time():
@@ -149,4 +145,6 @@ def main_loop():
         if option == add_task:
             name = get_input("Enter task\n> ")
             option(name)
+        else:
+            option()
 main_loop()
