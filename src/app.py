@@ -34,22 +34,6 @@ def choose_option():
             return options[option]
 
 
-## ADD TASK TO LIST ##
-# def add_task(name, deadline, rem_time):
-#     # datetime_now = datetime.now()
-#     # time_now_obj = datetime.now().time()
-#     # time_added_str = datetime.now().strftime(time_format)
-#     # name = get_input("Enter task\n> ")
-
-#     # has_deadline = get_input("Does this task have a deadline? [y/n]\n>")
-#     # if has_deadline == "y":
-
-
-#     task = (name, deadline, rem_time)
-#     todo_list.append(task)
-
-
-
 def mark_as_done():
     task = get_input("Enter completed task\n> ")
     # while True:
@@ -101,28 +85,18 @@ def todo_home():
     if len(todo_list) < 1:
         todo_table.add_row(["No current tasks", "-", "-"])    
     else:
-        for task in todo_list:       
-            todo_table.add_row([task[0], task[2], task[3]])
+        for task in todo_list:
+            name = task[0]
+            deadline = task[1]
+            rem_time = task[2]
+            if deadline == None:         
+                todo_table.add_row([name, "-", "-"])
+            else:
+                todo_table.add_row([name, deadline, rem_time])
 
     home_display = f"\n----TO-DO LIST APP----\nDate: {date_today}\nTime: {time_now_str}\n{todo_table}\nOptions:\n[A] Add a task\n[M] Mark as done\n[D] Delete a task\n[C] View completed list\n[X] Exit program"
     return home_display
     
-
-# def exit_program():
-#     confirmation = input("Are you sure you want to quit? [y/n]\n> ")
-#     if confirmation == "y":
-#         quit()
-#     else:
-#         return False
-
-## MAIN PROGRAM LOOP
-# def main_loop():
-#     while True:
-#         sort_by_rem_time()
-#         print(todo_home())
-#         choose_option()
-
-# main_loop()
 
 def get_deadline():
     # datetime_now = datetime.now()
@@ -143,21 +117,17 @@ def get_deadline():
         except ValueError:
                 print("ERROR: Invalid time format")
 
-    # return deadline_obj
-    
 
 def add_task(name):
     option = get_input("Does the task have a deadline? [y/n]\n> ")
     if option == "y":
         deadline = get_deadline()
-        has_deadline = True
         rem_time = calculate_rem_time(deadline)
     else:
         deadline = None
-        has_deadline = False
         rem_time = None
 
-    task = (name, has_deadline, deadline, rem_time)
+    task = (name, deadline, rem_time)
     todo_list.append(task)
 
 def calculate_rem_time(deadline):
@@ -168,17 +138,8 @@ def calculate_rem_time(deadline):
     rem_time = deadline_dt - time_now_dt
     return rem_time
 
-## EXTRACT deadline FROM task TUPLE ##
-def extract_rem_time(task):
-    has_deadline = task[1]
-    if has_deadline == True:
-        rem_time = task[2]    
-        return rem_time 
-
-
-## SORT LIST BY DEADLINE TIME ##
 def sort_by_rem_time():
-    todo_list.sort(key=extract_rem_time)
+    todo_list.sort(key=lambda x: (x[2] is None, x[2]))
 
 # MAIN PROGRAM LOOP
 def main_loop():
@@ -188,7 +149,4 @@ def main_loop():
         if option == add_task:
             name = get_input("Enter task\n> ")
             option(name)
-
-
-
 main_loop()
