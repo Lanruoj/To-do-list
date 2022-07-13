@@ -8,10 +8,12 @@ time_format = "%H:%M"
 todo_list = []
 completed_list = []
 
+
 # Gets user input, using different prompt messages
 def get_input(prompt):
     user_input = input(prompt)
     return user_input
+
 
 def exit_program():
     confirmation = get_input("Are you sure you want to quit? [y/n]\n> ")
@@ -65,7 +67,6 @@ def delete_task():
         print("ERROR: No existing task")
     
 
-
 def print_completed():
     os.system('cls' if os.name == 'nt' else 'clear')
     dt_now = datetime.now()
@@ -83,17 +84,17 @@ def print_completed():
         
     display = f"\n----TO-DO LIST APP----\nDate: {day_name}, {date_today}\nTime: {time_now_str}\n\n----COMPLETED TASKS----\n{completed_table}"
     print(display)
-    option = get_input("Enter [y] to continue\n> ")
-    if option == "y":
-        todo_home()
+    option = get_input("Enter any key to continue:\n> ")
+    if option:
+        return
 
 
 ## HOME ##
 def todo_home():
     os.system('cls' if os.name == 'nt' else 'clear')
+    sort_by_deadline()
     dt_now = datetime.now()
     day_name = dt_now.strftime("%A")
-    sort_by_rem_time()
     date_today = date.today()
     time_now_str = datetime.now().strftime(time_format)
     todo_table = PrettyTable()
@@ -117,19 +118,18 @@ def todo_home():
 
 def get_deadline():
     while True:
-        deadline_input = get_input("Enter deadline\n> ")
+        deadline_input = get_input("Enter deadline [HH:MM]\n> ")
         ## CHECK IF deadline_input MATCHES time_format ##
         try: 
-            deadline_obj = datetime.strptime(deadline_input, time_format).time()
-            # deadline_str = datetime.strftime(deadline_input, time_format)
-            if deadline_obj < datetime.now().time():
+            deadline = datetime.strptime(deadline_input, time_format).time()
+            if deadline < datetime.now().time():
                 print("ERROR: Time must be in the future")
             else:
                 break           
         except ValueError:
                 print("ERROR: Invalid time format")
 
-    return deadline_obj
+    return deadline
 
 
 def add_task(name):
@@ -146,6 +146,7 @@ def add_task(name):
     task = (name, deadline)
     todo_list.append(task)
 
+
 def calculate_rem_time(deadline):
     if deadline:
         datetime_now = datetime.now()
@@ -154,23 +155,25 @@ def calculate_rem_time(deadline):
         seconds = delta.seconds
         delta_dt = time.gmtime(seconds)
         rem_time = time.strftime(time_format, delta_dt)
-        return rem_time
     else:
         rem_time = None
-        return rem_time
+    
+    return rem_time
 
 
-def sort_by_rem_time():
+def sort_by_deadline():
     todo_list.sort(key=lambda x: (x[1] is None, x[1]))
 
-# MAIN PROGRAM LOOP
+
+## MAIN PROGRAM LOOP ##
 def main_loop():
     while True:
         print(todo_home())
         option = choose_option()
         if option == add_task:
-            name = get_input("Enter task\n> ")
+            name = get_input("Enter task:\n> ")
             option(name)
         else:
             option()
+
 main_loop()
