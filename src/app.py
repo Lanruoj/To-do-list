@@ -45,10 +45,9 @@ def choose_option():
 
 ## MARK A TASK AS COMPLETE, ADD TO COMPLETED LIST AND REMOVE FROM TODO LIST ##
 def mark_as_done():
-    while True:
+    task = ""
+    while task != "back":
         task = get_input("Enter completed task ([back] to cancel):\n> ")
-        if task == "back":
-            return 
         for i in todo_list:
             if task == i[0]:
                 time_added_str = datetime.now().strftime(time_format)

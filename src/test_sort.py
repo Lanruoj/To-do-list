@@ -1,11 +1,11 @@
-from app import extract_deadline, add_task, todo_list
+from app import exit_program, get_input
+import unittest
 
 # TEST SORTING BY DEADLINE WORKS -----------------------
-def test_sort_by_deadline():
+def test_exit_program():
     while True:
-        add_task()
-        print(f"Unsorted list: {todo_list}")
-        todo_list.sort(key=extract_deadline)
-        print(f"Sorted list: {todo_list}")
+        user_input = get_input("Enter X to exit")
 
-test_sort_by_deadline()
+
+
+test_exit_program()
