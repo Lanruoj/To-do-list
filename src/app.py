@@ -53,7 +53,7 @@ def mark_as_done():
         for i in todo_list:
             if task_id == str(i[0]):
                 time_added_str = datetime.now().strftime(time_format)
-                completed_task = (i[0], time_added_str)
+                completed_task = (i[1], time_added_str)
                 completed_list.append(completed_task)
                 todo_list.remove(i)
                 return completed_list
@@ -121,7 +121,7 @@ def todo_home():
             else:
                 todo_table.add_row([index, name, deadline, rem_time])
 
-    home_display = f"\n----TO-DO LIST APP----\nDate: {day_name}, {date_today}\nTime: {time_now_str}\n\n----REMAINING TASKS----\n{todo_table}\nOptions:\n[A] Add a task\n[M] Mark as done\n[D] Delete a task\n[C] View completed list\n[R] Refresh\n[X] Exit program"
+    home_display = f"\n----TO-DO LIST APP----\nDate: {day_name}, {date_today}\nTime: {time_now_str}\n\n----CURRENT TASKS----\n{todo_table}\nOptions:\n[A] Add a task\n[M] Mark as done\n[D] Delete a task\n[C] View completed list\n[R] Refresh\n[X] Exit program"
 
     return home_display
     
