@@ -37,8 +37,10 @@ def choose_option():
     }
     while True:
         option = get_input("> ")
+
         if option not in options:
             print("Invalid option")
+
         else:
             return options[option]
 
@@ -49,12 +51,14 @@ def mark_as_done():
     while task != "back":
         task = get_input("Enter completed task ([back] to cancel):\n> ")
         for i in todo_list:
+
             if task == i[0]:
                 time_added_str = datetime.now().strftime(time_format)
                 completed_task = (i[0], time_added_str)
                 completed_list.append(completed_task)
                 todo_list.remove(i)
                 return completed_list
+
         else:
             print("ERROR: No existing task")  
 
@@ -66,6 +70,7 @@ def delete_task():
         if task == i[0]:
             todo_list.remove(i)
             break
+
     else:
         print("ERROR: No existing task")
     
@@ -83,6 +88,7 @@ def print_completed():
     if len(completed_list) >= 1:
         for task in completed_list:       
             completed_table.add_row([task[0], task[1]])
+
     else:
         completed_table.add_row(["No completed tasks", "-"])  
         
@@ -107,24 +113,24 @@ def todo_home():
     date_today = date.today()
     time_now_str = datetime.now().strftime(time_format)
     todo_table = PrettyTable()
-    todo_table.field_names = ["Task", "Deadline", "Time remaining"]
+    todo_table.field_names = ["ID", "Task", "Deadline", "Time remaining"]
 
     if len(todo_list) < 1:
-        todo_table.add_row(["No current tasks", "-", "-"])    
+        todo_table.add_row(["-", "No current tasks", "-", "-"])    
+
     else:
+        index = 0
         for task in todo_list:
+            index += 1
             name = task[0]
             deadline = task[1]
             rem_time = calculate_rem_time(deadline)
+
             if deadline == None:
-                todo_table.add_row([name, "-", "-"])
-            ####
-            # elif rem_time == "00:00":
-            #     rem_time = "Overdue!"
-            #     todo_table.add_row([name, deadline, "Overdue!"])
-            # ####
+                todo_table.add_row([index, name, "-", "-"])
+
             else:
-                todo_table.add_row([name, deadline, rem_time])
+                todo_table.add_row([index, name, deadline, rem_time])
 
     home_display = f"\n----TO-DO LIST APP----\nDate: {day_name}, {date_today}\nTime: {time_now_str}\n\n----REMAINING TASKS----\n{todo_table}\nOptions:\n[A] Add a task\n[M] Mark as done\n[D] Delete a task\n[C] View completed list\n[R] Refresh\n[X] Exit program"
     return home_display
