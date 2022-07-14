@@ -35,42 +35,39 @@ def choose_option():
         "R": refresh,
         "X": exit_program
     }
-    while True:
+    valid_option = False
+    while not valid_option:
         option = get_input("> ")
-
         if option not in options:
             print("Invalid option")
-
         else:
+            valid_option = True
             return options[option]
 
 
 ## MARK A TASK AS COMPLETE, ADD TO COMPLETED LIST AND REMOVE FROM TODO LIST ##
 def mark_as_done():
-    task = ""
-    while task != "back":
-        task = get_input("Enter completed task ([back] to cancel):\n> ")
+    task_id = ""
+    while task_id != "back":
+        task_id = get_input("Enter ID# of completed task ([back] to cancel):\n> ")
         for i in todo_list:
-
-            if task == i[0]:
+            if task_id == str(i[0]):
                 time_added_str = datetime.now().strftime(time_format)
                 completed_task = (i[0], time_added_str)
                 completed_list.append(completed_task)
                 todo_list.remove(i)
                 return completed_list
-
         else:
             print("ERROR: No existing task")  
 
 
 ## DELETE TASK FROM TODO LIST ##
 def delete_task():
-    task = get_input("Enter task to delete ([back] to cancel):\n> ")
+    task = get_input("Enter ID# of task to delete ([back] to cancel):\n> ")
     for i in todo_list:
-        if task == i[0]:
+        if task == str(i[0]):
             todo_list.remove(i)
             break
-
     else:
         print("ERROR: No existing task")
     
@@ -84,14 +81,11 @@ def print_completed():
     time_now_str = datetime.now().strftime(time_format)
     completed_table = PrettyTable()
     completed_table.field_names = ["Task", "Time completed"]
-
     if len(completed_list) >= 1:
         for task in completed_list:       
             completed_table.add_row([task[0], task[1]])
-
     else:
-        completed_table.add_row(["No completed tasks", "-"])  
-        
+        completed_table.add_row(["No completed tasks", "-"])         
     display = f"\n----TO-DO LIST APP----\nDate: {day_name}, {date_today}\nTime: {time_now_str}\n\n----COMPLETED TASKS----\n{completed_table}"
     print(display)
     option = get_input("Enter any key to continue:\n> ")
@@ -113,26 +107,22 @@ def todo_home():
     date_today = date.today()
     time_now_str = datetime.now().strftime(time_format)
     todo_table = PrettyTable()
-    todo_table.field_names = ["ID", "Task", "Deadline", "Time remaining"]
-
+    todo_table.field_names = ["ID#", "Task", "Deadline", "Time remaining"]
     if len(todo_list) < 1:
         todo_table.add_row(["-", "No current tasks", "-", "-"])    
-
     else:
         for task in todo_list:
             index = task[0]
-            # index += 1
             name = task[1]
             deadline = task[2]
             rem_time = calculate_rem_time(deadline)
-
             if deadline == None:
                 todo_table.add_row([index, name, "-", "-"])
-
             else:
                 todo_table.add_row([index, name, deadline, rem_time])
 
     home_display = f"\n----TO-DO LIST APP----\nDate: {day_name}, {date_today}\nTime: {time_now_str}\n\n----REMAINING TASKS----\n{todo_table}\nOptions:\n[A] Add a task\n[M] Mark as done\n[D] Delete a task\n[C] View completed list\n[R] Refresh\n[X] Exit program"
+
     return home_display
     
 
@@ -141,7 +131,6 @@ def get_deadline():
     valid_input = False
     while not valid_input:
         deadline_input = get_input("Enter deadline [HH:MM]:\n> ")
-        ## CHECK IF deadline_input MATCHES time_format ##
         try: 
             deadline = datetime.strptime(deadline_input, time_format).time()
             if deadline < datetime.now().time():
