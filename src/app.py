@@ -119,11 +119,11 @@ def todo_home():
         todo_table.add_row(["-", "No current tasks", "-", "-"])    
 
     else:
-        index = 0
         for task in todo_list:
-            index += 1
-            name = task[0]
-            deadline = task[1]
+            index = task[0]
+            # index += 1
+            name = task[1]
+            deadline = task[2]
             rem_time = calculate_rem_time(deadline)
 
             if deadline == None:
@@ -155,7 +155,7 @@ def get_deadline():
 
 
 ## ADD TASK TO TODO LIST WITH NAME AND DEADLINE VALUES ##
-def add_task(name):
+def add_task(index, name):
     deadline = False
     while deadline == False:
         option = get_input("Does the task have a deadline? [y/n]:\n> ")
@@ -166,7 +166,7 @@ def add_task(name):
         else:
             print("ERROR: Invalid input")
 
-    task = (name, deadline)
+    task = [index, name, deadline]
     todo_list.append(task)
 
 
@@ -190,17 +190,19 @@ def calculate_rem_time(deadline):
 
 ## SORT TODO LIST BY DEADLINE ##
 def sort_by_deadline():
-    todo_list.sort(key=lambda x: (x[1] is None, x[1]))
+    todo_list.sort(key=lambda x: (x[2] is None, x[2]))
 
 
 ## MAIN PROGRAM LOOP ##
 def main_loop():
+    index = 0
     while True:
         print(todo_home())
         option = choose_option()
         if option == add_task:
             name = get_input("Enter task:\n> ")
-            option(name)
+            index += 1
+            option(index, name)
         else:
             option()
 
