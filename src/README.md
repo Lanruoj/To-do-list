@@ -29,7 +29,7 @@ First, it greets the user with the day/date/time and displays that day's tasks i
     - Uses datetime module for time and date information/calculations
     - "Home" function, all functions except exit loops back to this
     - Sorts the global unsorted list on each execution
-    - Displays task name, time added, deadline time, and time remaining (using timedelta)
+    - Displays task name, deadline time, and time remaining (using timedelta)
     - Takes in the tasks from a global data structure
     - If no tasks, show "no current tasks"
     - Show options for user
@@ -41,7 +41,6 @@ First, it greets the user with the day/date/time and displays that day's tasks i
 
 3. Add a task to the todo-list with time information
     - Asks for user to add a task
-    - Stores time added with task object (using datetime module)
     - Asks user if the task has a deadline/due-date
         - If the time isn't in the specified format, throw an error and ask again
     - If it does, stores deadline with the task object

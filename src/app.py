@@ -9,14 +9,15 @@ todo_list = []
 completed_list = []
 
 
-# Gets user input, using different prompt messages
+## GETS USER INPUT USING A UNIQUE PROMPT WHEN CALLED ##
 def get_input(prompt):
     user_input = input(prompt)
     return user_input
 
 
+## GRACEFULLY EXIT PROGRAM WITH CONFIRMATION PROMPT AND FAREWELL MESSAGE ##
 def exit_program():
-    confirmation = get_input("Are you sure you want to quit? [y/n]\n> ")
+    confirmation = get_input("Are you sure you want to quit? [y/n]:\n> ")
     if confirmation == "y":
         print("Have a great day!")
         quit()
@@ -24,7 +25,8 @@ def exit_program():
         return
 
 
-# User chooses what they'd like the program to do via user input
+
+## USER CHOOSES OPTION FROM A DICTIONARY OF FUNCTION NAMES ##
 def choose_option():
     options = {
         "A": add_task,
@@ -41,9 +43,10 @@ def choose_option():
             return options[option]
 
 
+## MARK A TASK AS COMPLETE, ADD TO COMPLETED LIST AND REMOVE FROM TODO LIST ##
 def mark_as_done():
     while True:
-        task = get_input("Enter completed task ([back] to cancel)\n> ")
+        task = get_input("Enter completed task ([back] to cancel):\n> ")
         if task == "back":
             return 
         for i in todo_list:
@@ -57,8 +60,9 @@ def mark_as_done():
             print("ERROR: No existing task")  
 
 
+## DELETE TASK FROM TODO LIST ##
 def delete_task():
-    task = get_input("Enter task to delete ([back] to cancel)\n> ")
+    task = get_input("Enter task to delete ([back] to cancel):\n> ")
     for i in todo_list:
         if task == i[0]:
             todo_list.remove(i)
@@ -67,6 +71,7 @@ def delete_task():
         print("ERROR: No existing task")
     
 
+## DISPLAY COMPLETED TASKS IN A FORMATTED TABLE ##
 def print_completed():
     os.system('cls' if os.name == 'nt' else 'clear')
     dt_now = datetime.now()
@@ -85,11 +90,12 @@ def print_completed():
     display = f"\n----TO-DO LIST APP----\nDate: {day_name}, {date_today}\nTime: {time_now_str}\n\n----COMPLETED TASKS----\n{completed_table}"
     print(display)
     option = get_input("Enter any key to continue:\n> ")
+
     if option:
         return
 
 
-## HOME ##
+## DISPLAY TODO LIST AS FORMATTED TABLE, SHOW USER OPTIONS ##
 def todo_home():
     os.system('cls' if os.name == 'nt' else 'clear')
     sort_by_deadline()
@@ -116,9 +122,10 @@ def todo_home():
     return home_display
     
 
+## GET DEADLINE TIME FROM USER INPUT ##
 def get_deadline():
     while True:
-        deadline_input = get_input("Enter deadline [HH:MM]\n> ")
+        deadline_input = get_input("Enter deadline [HH:MM]:\n> ")
         ## CHECK IF deadline_input MATCHES time_format ##
         try: 
             deadline = datetime.strptime(deadline_input, time_format).time()
@@ -132,10 +139,11 @@ def get_deadline():
     return deadline
 
 
+## ADD TASK TO TODO LIST WITH NAME AND DEADLINE VALUES ##
 def add_task(name):
     deadline = False
     while deadline == False:
-        option = get_input("Does the task have a deadline? [y/n]\n> ")
+        option = get_input("Does the task have a deadline? [y/n]:\n> ")
         if option == "y":
             deadline = get_deadline()
         elif option == "n":
@@ -147,6 +155,7 @@ def add_task(name):
     todo_list.append(task)
 
 
+## CALCULATE REMAINING TIMEDELTA FROM DEADLINE AND CURRENT TIME ##
 def calculate_rem_time(deadline):
     if deadline:
         datetime_now = datetime.now()
@@ -161,6 +170,7 @@ def calculate_rem_time(deadline):
     return rem_time
 
 
+## SORT TODO LIST BY DEADLINE ##
 def sort_by_deadline():
     todo_list.sort(key=lambda x: (x[1] is None, x[1]))
 
