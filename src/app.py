@@ -123,7 +123,8 @@ def todo_home():
 
 ## GET DEADLINE TIME FROM USER INPUT ##
 def get_deadline():
-    while True:
+    valid_input = False
+    while not valid_input:
         deadline_input = get_input("Enter deadline [HH:MM]:\n> ")
         ## CHECK IF deadline_input MATCHES time_format ##
         try: 
@@ -131,7 +132,7 @@ def get_deadline():
             if deadline < datetime.now().time():
                 print("ERROR: Time must be in the future")
             else:
-                break           
+                valid_input = True          
         except ValueError:
                 print("ERROR: Invalid time format")
 
