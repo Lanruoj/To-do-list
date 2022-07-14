@@ -25,7 +25,6 @@ def exit_program():
         return
 
 
-
 ## USER CHOOSES OPTION FROM A DICTIONARY OF FUNCTION NAMES ##
 def choose_option():
     options = {
@@ -33,6 +32,7 @@ def choose_option():
         "M": mark_as_done,
         "D": delete_task,
         "C": print_completed,
+        "R": refresh,
         "X": exit_program
     }
     while True:
@@ -94,6 +94,10 @@ def print_completed():
         return
 
 
+## REFRESH TODO HOME ##
+def refresh():
+    todo_home()
+
 ## DISPLAY TODO LIST AS FORMATTED TABLE, SHOW USER OPTIONS ##
 def todo_home():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -112,12 +116,17 @@ def todo_home():
             name = task[0]
             deadline = task[1]
             rem_time = calculate_rem_time(deadline)
-            if deadline == None:         
+            if deadline == None:
                 todo_table.add_row([name, "-", "-"])
+            ####
+            # elif rem_time == "00:00":
+            #     rem_time = "Overdue!"
+            #     todo_table.add_row([name, deadline, "Overdue!"])
+            # ####
             else:
                 todo_table.add_row([name, deadline, rem_time])
 
-    home_display = f"\n----TO-DO LIST APP----\nDate: {day_name}, {date_today}\nTime: {time_now_str}\n\n----REMAINING TASKS----\n{todo_table}\nOptions:\n[A] Add a task\n[M] Mark as done\n[D] Delete a task\n[C] View completed list\n[X] Exit program"
+    home_display = f"\n----TO-DO LIST APP----\nDate: {day_name}, {date_today}\nTime: {time_now_str}\n\n----REMAINING TASKS----\n{todo_table}\nOptions:\n[A] Add a task\n[M] Mark as done\n[D] Delete a task\n[C] View completed list\n[R] Refresh\n[X] Exit program"
     return home_display
     
 
@@ -160,13 +169,16 @@ def calculate_rem_time(deadline):
     if deadline:
         datetime_now = datetime.now()
         deadline_dt = datetime.combine(date.today(), deadline)
-        delta = deadline_dt - datetime_now
-        seconds = delta.seconds
-        delta_dt = time.gmtime(seconds)
-        rem_time = time.strftime(time_format, delta_dt)
+        if deadline_dt > datetime_now:
+            delta = deadline_dt - datetime_now
+            seconds = delta.seconds
+            delta_dt = time.gmtime(seconds)
+            rem_time = time.strftime(time_format, delta_dt)
+        else:
+            return "OVERDUE"
     else:
         rem_time = None
-    
+        
     return rem_time
 
 
