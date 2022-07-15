@@ -219,6 +219,7 @@ def help():
     if option in help_options:
         help_options[option]()
 
+## BASH COMMANDS ##
 if argv[1] == "todo":  
     main_loop()
 
