@@ -1,1 +1,12 @@
-Hello, I'm a help file!
+----TO-DO LIST APP----
+
+
+INSTRUCTIONS
+
+To run todo-list program:
+> ./todo.sh todo
+OR
+> python3 todo.py
+
+To access this help documentation:
+> ./todo.sh help

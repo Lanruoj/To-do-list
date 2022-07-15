@@ -1,2 +1,2 @@
 #!/bin/bash
-python3 app.py $1
+python3 todo.py $1

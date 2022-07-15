@@ -12,7 +12,7 @@ completed_list = []
 
 ## DISPLAY TODO LIST AS FORMATTED TABLE, SHOW USER OPTIONS ##
 def todo_home():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    clear_terminal()
     sort_by_deadline()
     dt_now = datetime.now()
     day_name = dt_now.strftime("%A")
@@ -165,7 +165,7 @@ def delete_task():
 
 ## DISPLAY COMPLETED TASKS IN A FORMATTED TABLE ##
 def print_completed():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    clear_terminal()
     dt_now = datetime.now()
     day_name = dt_now.strftime("%A")
     date_today = date.today()
@@ -203,10 +203,14 @@ def continue_prompt():
 def run_program():
     main_loop()
 
+def clear_terminal():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 if argv[1] == "todo":  
     main_loop()
 
 elif argv[1] == "help":
+    clear_terminal()
     help_options = {
         "T": run_program,
         "X": exit_program
