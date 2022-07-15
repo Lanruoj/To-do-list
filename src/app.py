@@ -2,6 +2,7 @@ from datetime import date, datetime, time
 import time
 from prettytable import PrettyTable
 import os
+from sys import argv
 
 ## GLOBAL VARIABLES ##
 TIME_FORMAT = "%H:%M"
@@ -197,4 +198,11 @@ def main_loop():
         else:
             option()
 
-main_loop()
+if argv[1] == "todo":  
+    main_loop()
+
+elif argv[1] == "help":
+    help_file = open("HELP.txt", "r")
+    print(help_file.read())
+
+# print(f"The arguments you passed: '{argv}'")

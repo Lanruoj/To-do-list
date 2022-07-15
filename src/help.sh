@@ -1,2 +1,2 @@
 #!/bin/bash
-cat ../HELP.txt
+cat HELP.txt

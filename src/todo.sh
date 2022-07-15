@@ -1,2 +1,3 @@
 #!/bin/bash
-python3 app.py
+# echo "You wrote: " $1
+python3 app.py $1
