@@ -34,7 +34,7 @@ def todo_home():
             else:
                 todo_table.add_row([index, name, deadline, rem_time])
 
-    home_display = f"\n----TO-DO LIST APP----\nDate: {day_name}, {date_today}\nTime: {time_now_str}\n\n----CURRENT TASKS----\n{todo_table}\nOptions:\n[R] Refresh\n[A] Add a task\n[M] Mark as done\n[D] Delete a task\n[C] View completed list\n[H] Help\n[X] Exit program"
+    home_display = f"\n----TRACKS----\nDate: {day_name}, {date_today}\nTime: {time_now_str}\n\n----CURRENT TASKS----\n{todo_table}\nOptions:\n[R] Refresh\n[A] Add a task\n[M] Mark as done\n[D] Delete a task\n[C] View completed list\n[H] Help\n[X] Exit program"
 
     return home_display
 
@@ -178,7 +178,7 @@ def print_completed():
             completed_table.add_row([task[0], task[1]])
     else:
         completed_table.add_row(["No completed tasks", "-"])         
-    display = f"\n----TO-DO LIST APP----\nDate: {day_name}, {date_today}\nTime: {time_now_str}\n\n----COMPLETED TASKS----\n{completed_table}"
+    display = f"\n----TRACKS----\nDate: {day_name}, {date_today}\nTime: {time_now_str}\n\n----COMPLETED TASKS----\n{completed_table}"
     print(display)
     continue_prompt()
 
