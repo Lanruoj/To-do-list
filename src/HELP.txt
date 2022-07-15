@@ -29,3 +29,4 @@ View completed list
 This is the best part! Time to see what you've accomplished today.
 1. From the home screen, enter C
 1. Press enter to return home
+

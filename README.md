@@ -1,7 +1,7 @@
 # *T1A3 Terminal App assessment* - Tane Kaio, 2022
 
 ## Source control
-[Github repository](https://github.com/Lanruoj/To-do-list/tree/master)
+[Github repository](https://github.com/Lanruoj/Tracks-Task-Manager)
 
 ## Implementation plan
 [Trello board](https://trello.com/b/5F9d2hi9/t1a3-terminal-application)
@@ -59,3 +59,4 @@ First, it greets the user with the day/date/time and displays that day's tasks i
 1. Check that `choose_options()` outputs and runs a function when user input matches option
     * Run a dummy function `print_hello` that prints `"hello"` when user inputs corresponding dictionary key `"H"`
     
+

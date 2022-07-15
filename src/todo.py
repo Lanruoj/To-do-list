@@ -1,5 +1,6 @@
 from datetime import date, datetime, time
 import time
+from turtle import clear
 from prettytable import PrettyTable
 import os
 from sys import argv
@@ -8,7 +9,6 @@ from sys import argv
 TIME_FORMAT = "%H:%M"
 todo_list = []
 completed_list = []
-
 
 ## DISPLAY TODO LIST AS FORMATTED TABLE, SHOW USER OPTIONS ##
 def todo_home():
@@ -38,11 +38,9 @@ def todo_home():
 
     return home_display
 
-
 ## SORT TODO LIST BY DEADLINE ##
 def sort_by_deadline():
     todo_list.sort(key=lambda x: (x[2] is None, x[2]))
-
 
 ## CALCULATE REMAINING TIMEDELTA FROM DEADLINE AND CURRENT TIME ##
 def calculate_rem_time(deadline):
@@ -61,12 +59,10 @@ def calculate_rem_time(deadline):
         
     return rem_time
 
-
 ## GETS USER INPUT USING A UNIQUE PROMPT WHEN CALLED ##
 def get_input(prompt):
     user_input = input(prompt)
     return user_input
-
 
 ## GRACEFULLY EXIT PROGRAM WITH CONFIRMATION PROMPT AND FAREWELL MESSAGE ##
 def exit_program():
@@ -77,11 +73,9 @@ def exit_program():
     else:
         return
 
-
 ## REFRESH TODO HOME ##
 def refresh():
     todo_home()
-
 
 ## USER CHOOSES OPTION FROM A DICTIONARY OF FUNCTION NAMES ##
 def choose_option():
@@ -103,7 +97,6 @@ def choose_option():
             valid_option = True
             return options[option]
 
-
 ## ADD TASK TO TODO LIST WITH NAME AND DEADLINE VALUES ##
 def add_task(index, name):
     deadline = False
@@ -118,7 +111,6 @@ def add_task(index, name):
 
     task = [index, name, deadline]
     todo_list.append(task)
-
 
 ## GET DEADLINE TIME FROM USER INPUT ##
 def get_deadline():
@@ -136,7 +128,6 @@ def get_deadline():
 
     return deadline
 
-
 ## MARK A TASK AS COMPLETE, ADD TO COMPLETED LIST AND REMOVE FROM TODO LIST ##
 def mark_as_done():
     task_id = ""
@@ -152,7 +143,6 @@ def mark_as_done():
         else:
             print("ERROR: No existing task")  
 
-
 ## DELETE TASK FROM TODO LIST ##
 def delete_task():
     task = get_input("Enter ID# of task to delete ([back] to cancel):\n> ")
@@ -163,7 +153,6 @@ def delete_task():
     else:
         print("ERROR: No existing task")
     
-
 ## DISPLAY COMPLETED TASKS IN A FORMATTED TABLE ##
 def print_completed():
     clear_terminal()
@@ -182,7 +171,6 @@ def print_completed():
     print(display)
     continue_prompt()
 
-
 ## MAIN PROGRAM LOOP ##
 def main_loop():
     index = 0
@@ -196,17 +184,21 @@ def main_loop():
         else:
             option()
 
+## CHECK IF USER WANTS TO CONTINUE ##
 def continue_prompt():
     option = get_input("Press enter to continue:\n> ")
     if not option:
         return
 
+## RUN MAIN PROGRAM ##
 def run_program():
     main_loop()
 
+## CLEAR TERMINAL SCREEN ##
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
+## SHOW HELP DOCUMENT ##
 def help():
     clear_terminal()
     help_options = {
@@ -220,14 +212,12 @@ def help():
         help_options[option]()
 
 ## BASH COMMANDS ##
-# if len(argv) == 0:      
-#     main_loop()
+if len(argv) == 1:      
+    run_program()
 
-# else: 
-#     if argv[1] == "todo":  
-#         main_loop()
+elif len(argv) > 1: 
+    if argv[1] == "todo":  
+        run_program()
 
-#     elif argv[1] == "help":
-#         help()
-
-main_loop()
+    elif argv[1] == "help":
+        help()
