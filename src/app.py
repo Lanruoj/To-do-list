@@ -179,10 +179,7 @@ def print_completed():
         completed_table.add_row(["No completed tasks", "-"])         
     display = f"\n----TO-DO LIST APP----\nDate: {day_name}, {date_today}\nTime: {time_now_str}\n\n----COMPLETED TASKS----\n{completed_table}"
     print(display)
-    option = get_input("Enter any key to continue:\n> ")
-
-    if option:
-        return
+    continue_prompt()
 
 
 ## MAIN PROGRAM LOOP ##
@@ -198,11 +195,24 @@ def main_loop():
         else:
             option()
 
+def continue_prompt():
+    option = get_input("Press enter to continue:\n> ")
+    if not option:
+        return
+
+def run_program():
+    main_loop()
+
 if argv[1] == "todo":  
     main_loop()
 
 elif argv[1] == "help":
+    help_options = {
+        "T": run_program,
+        "X": exit_program
+    }
     help_file = open("HELP.txt", "r")
     print(help_file.read())
-
-# print(f"The arguments you passed: '{argv}'")
+    option = get_input("Options:\n[T] Run todo-list program\n[X] Exit program\n> ")
+    if option in help_options:
+        help_options[option]()
