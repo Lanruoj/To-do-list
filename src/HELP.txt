@@ -1,11 +1,31 @@
 ----TRACKS----
 
-INSTRUCTIONS
+Operating the program
 
-To run todo-list program:
-> ./todo.sh todo
-OR
-> python3 todo.py
+- Choose an option from the options list and enter the corresponding key following by the enter key: for example, enter A to Add a task to the to-do list
+- If you need help, enter H to view these instructions
+- Enter R to refresh the program with updated times
+- Enter X to exit the program
 
-To access this help documentation:
-> ./todo.sh help
+Adding a task
+1. From the home screen, enter A
+2. Enter the task
+3. If the task has a time it needs to be done by, enter y to assign a deadline (must be in HH:MM format)
+4. Otherwise choose n
+5. The task will now appear in the to-do list
+
+Marking a task as done
+1. From the home screen, enter M
+2. Enter the ID# of the task (not the task's name), or enter back to cancel
+3. Congratulations, you've completed a task!
+
+Delete a task
+If you would like to simply delete a task:
+1. From the home screen, enter D
+2. Enter the ID# of the task (not the task's name), or enter back to cancel
+3. The task will be removed from the to-do list
+
+View completed list
+This is the best part! Time to see what you've accomplished today.
+1. From the home screen, enter C
+1. Press enter to return home
