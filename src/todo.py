@@ -213,15 +213,21 @@ def help():
         "T": run_program,
         "X": exit_program
     }
-    help_file = open("HELP.txt", "r")
+    help_file = open("src/help.txt", "r")
     print(help_file.read())
     option = get_input("Options:\n[T] Run todo-list program\n[X] Exit program\n> ")
     if option in help_options:
         help_options[option]()
 
 ## BASH COMMANDS ##
-if argv[1] == "todo":  
-    main_loop()
+# if len(argv) == 0:      
+#     main_loop()
 
-elif argv[1] == "help":
-    help()
+# else: 
+#     if argv[1] == "todo":  
+#         main_loop()
+
+#     elif argv[1] == "help":
+#         help()
+
+main_loop()
