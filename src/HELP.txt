@@ -1,6 +1,5 @@
 ----TO-DO LIST APP----
 
-
 INSTRUCTIONS
 
 To run todo-list program:

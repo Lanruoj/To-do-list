@@ -34,7 +34,7 @@ def todo_home():
             else:
                 todo_table.add_row([index, name, deadline, rem_time])
 
-    home_display = f"\n----TO-DO LIST APP----\nDate: {day_name}, {date_today}\nTime: {time_now_str}\n\n----CURRENT TASKS----\n{todo_table}\nOptions:\n[A] Add a task\n[M] Mark as done\n[D] Delete a task\n[C] View completed list\n[R] Refresh\n[X] Exit program"
+    home_display = f"\n----TO-DO LIST APP----\nDate: {day_name}, {date_today}\nTime: {time_now_str}\n\n----CURRENT TASKS----\n{todo_table}\nOptions:\n[R] Refresh\n[A] Add a task\n[M] Mark as done\n[D] Delete a task\n[C] View completed list\n[H] Help\n[X] Exit program"
 
     return home_display
 
@@ -91,6 +91,7 @@ def choose_option():
         "D": delete_task,
         "C": print_completed,
         "R": refresh,
+        "H": help,
         "X": exit_program
     }
     valid_option = False
@@ -206,10 +207,7 @@ def run_program():
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-if argv[1] == "todo":  
-    main_loop()
-
-elif argv[1] == "help":
+def help():
     clear_terminal()
     help_options = {
         "T": run_program,
@@ -220,3 +218,9 @@ elif argv[1] == "help":
     option = get_input("Options:\n[T] Run todo-list program\n[X] Exit program\n> ")
     if option in help_options:
         help_options[option]()
+
+if argv[1] == "todo":  
+    main_loop()
+
+elif argv[1] == "help":
+    help()
