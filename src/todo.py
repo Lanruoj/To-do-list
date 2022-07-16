@@ -204,7 +204,7 @@ def help():
         "T": run_program,
         "X": exit_program
     }
-    help_file = open("src/help.txt", "r")
+    help_file = open("help.txt", "r")
     print(help_file.read())
     option = get_input("Options:\n[T] Run todo-list program\n[X] Exit program\n> ")
     if option in help_options:
