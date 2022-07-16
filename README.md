@@ -1,62 +1,73 @@
-# *T1A3 Terminal App assessment* - Tane Kaio, 2022
+# **Tracks** - *a task manager for the unorganised*
+**Author**: Tané Kaio  
+****
+## Concept
+If you're anything like me, you need help with keeping track of your daily tasks to stay organised and ensure things are done on time. This app allows us to keep a list of our daily tasks, sorted by the time we need them done by. When we complete a task we can mark it as done, then view all of those completed tasks to remind ourselves of how productive we are! Seeing what we've accomplished is a very rewarding experience and is essential to remain motivated, so I believe we should focus on our past achievements as much as what we're working on for the future. 
+****
+## Instructions  
+*To install Tracks*  
+1. Go to https://github.com/Lanruoj/Tracks-Task-Manager
+2. Locate and click the green **Code** button  
 
-## Source control
-[Github repository](https://github.com/Lanruoj/Tracks-Task-Manager)
+<img src="img/git-code.png" alt="code button" height="50px">
 
-## Implementation plan
-[Trello board](https://trello.com/b/5F9d2hi9/t1a3-terminal-application)
+3. From the drop down menu, click **Download ZIP**
 
-## Flowcharts
+<img src="img/git-zip.png" alt="download zip" height="50px">
 
+*To run as executable*  
+1. Unzip and open the downloaded folder `Tracks-Task-Manager`
+2. Open the `Tracks` executable file
 
-## Style guide  
-I will be following the [Python Enhancement Proposals 8](https://peps.python.org/pep-0008/) (Pep8). 
-
-## Concept:
-*To-do list app*
-First, it greets the user with the day/date/time and displays that day's tasks in the format of a to-do list sorted by deadline times (unless the list is empty). Then, users can:
-* Choose an option for what to do
-* Add a task from user input
-* Store time task was added
-* Store optional deadline with task
-* Mark tasks as done
-* Delete tasks
-* View completed tasks
-* Gracefully quit program
-
-## List of features:
-1. Display todo-list with a formatted string in a table-like design
-    - Uses datetime module for time and date information/calculations
-    - "Home" function, all functions except exit loops back to this
-    - Sorts the global unsorted list on each execution
-    - Displays task name, deadline time, and time remaining (using timedelta)
-    - Takes in the tasks from a global data structure
-    - If no tasks, show "no current tasks"
-    - Show options for user
-
-2. User can choose an option for what to do 
-    - Checks for keyboard input that matches a dictionary of options (local variable)
-        - If it doesn't, throw error and try again
-    - Runs the corresponding function name as the value in dictionary
-
-3. Add a task to the todo-list with time information
-    - Asks for user to add a task
-    - Asks user if the task has a deadline/due-date
-        - If the time isn't in the specified format, throw an error and ask again
-    - If it does, stores deadline with the task object
-    - Adds task to global unsorted list
-
-4. Mark tasks as done
-    - User can mark a task as completed 
-    - Checks if task is in list or not
-        - If it doesn't, throw error and try again
-    - Otherwise, adds it to a global completed list
-    - Removes from global todo list
+*To run from command line*  
+1. Locate application directory in terminal
+> `cd Tracks-Task-Manager`
+2. To run main program 
+> `./Tracks todo` or `./Tracks`
+3. To run help document and instructions
+> `./Tracks help`
 
 
+*Operating the program*  
+* Choose an option from the options list and enter the corresponding key following by the enter key: for example, enter `A` to `Add a task` to the to-do list
+* If you need help, enter `H` to view these instructions
+* Enter `R` to refresh the program with updated times
+* Enter `X` to exit the program
 
-## Tests
-1. Check that `choose_options()` outputs and runs a function when user input matches option
-    * Run a dummy function `print_hello` that prints `"hello"` when user inputs corresponding dictionary key `"H"`
-    
+*Adding a task*  
+1. From the home screen, enter `A`
+2. Enter the task
+3. If the task has a time it needs to be done by, enter `y` to assign a deadline (must be in `HH:MM` format)
+4. Otherwise choose `n`
+5. The task will now appear in the to-do list
+
+*Marking a task as done*
+1. From the home screen, enter `M`
+2. Enter the `ID#` of the task (not the task's name), or enter `back` to cancel
+3. Congratulations, you've completed a task!
+
+*Delete a task*  
+If you would like to simply delete a task:
+1. From the home screen, enter `D`
+2. Enter the `ID#` of the task (not the task's name), or enter `back` to cancel
+3. The task will be removed from the to-do list
+
+*View completed list*  
+This is the best part! Time to see what you've accomplished today.
+1. From the home screen, enter `C`
+2. Press enter to return home
+
+****
+## System requirements
+
+*Git:*
+> `git version 2.32.0`
+
+*Interpreter:*
+> `Python 3.10.1`
+
+*Dependencies:*  
+> `prettytable 3.3.0`  
+> `wcwidth     0.2.5`
+
 
