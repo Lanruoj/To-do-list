@@ -21,9 +21,11 @@ If you're anything like me, you need help with keeping track of your daily tasks
 2. Locate the `src` directory
 > `cd src`
 3. To run main program 
-> `./Tracks.sh todo`
+> `./Tracks.sh todo`  
+> *The required packages will be automatically installed*  
 4. To run help document and instructions
 > `./Tracks.sh help`
+
 
 
 *Operating the program*  
