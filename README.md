@@ -17,7 +17,7 @@ If you're anything like me, you need help with keeping track of your daily tasks
 
 *To run from command line*  
 1. Locate application directory in terminal
-> `cd Tracks-Task-Manager`
+> `cd` ~ `/Tracks-Task-Manager`
 2. Locate the `src` directory
 > `cd src`
 3. To run main program 
