@@ -1,6 +1,5 @@
 from datetime import date, datetime, time
 import time
-from turtle import clear
 from prettytable import PrettyTable
 import os
 from sys import argv
