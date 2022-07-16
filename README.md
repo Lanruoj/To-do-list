@@ -15,17 +15,15 @@ If you're anything like me, you need help with keeping track of your daily tasks
 
 <img src="img/git-zip.png" alt="download zip" height="50px">
 
-*To run as executable*  
-1. Unzip and open the downloaded folder `Tracks-Task-Manager`
-2. Open the `Tracks` executable file
-
 *To run from command line*  
 1. Locate application directory in terminal
 > `cd Tracks-Task-Manager`
-2. To run main program 
-> `./Tracks todo` or `./Tracks`
-3. To run help document and instructions
-> `./Tracks help`
+2. Locate the `src` directory
+> `cd src`
+3. To run main program 
+> `./Tracks.sh todo`
+4. To run help document and instructions
+> `./Tracks.sh help`
 
 
 *Operating the program*  
