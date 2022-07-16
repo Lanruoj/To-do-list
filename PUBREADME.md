@@ -5,13 +5,28 @@
 If you're anything like me, you need help with keeping track of your daily tasks to stay organised and ensure things are done on time. This app allows us to keep a list of our daily tasks, sorted by the time we need them done by. When we complete a task we can mark it as done, then view all of those completed tasks to remind ourselves of how productive we are! Seeing what we've accomplished is a very rewarding experience and is essential to remain motivated, so I believe we should focus on our past achievements as much as what we're working on for the future. 
 ****
 ## Instructions  
-
 *To install Tracks*  
 1. Go to https://github.com/Lanruoj/Tracks-Task-Manager
-2. Locate the green **Code** button
-3. Select **Download ZIP**
-4. Open the downloaded folder `Tracks-Task-Manager`
-5. Open the `Tracks` executable file
+2. Locate and click the green **Code** button  
+
+<img src="git-code.png" alt="code button" height="50px">
+
+3. From the drop down menu, click **Download ZIP**
+
+<img src="dl-zip.png" alt="download zip" height="50px">
+
+*To run as executable*  
+1. Open the downloaded folder `Tracks-Task-Manager`
+2. Open the `Tracks` executable file
+
+*To run from command line*  
+1. Locate application directory in terminal
+> `cd Tracks-Task-Manager`
+2. To run main program 
+> `./Tracks todo` or `./Tracks`
+3. To run help document and instructions
+> `./Tracks help`
+
 
 *Operating the program*  
 * Choose an option from the options list and enter the corresponding key following by the enter key: for example, enter `A` to `Add a task` to the to-do list
